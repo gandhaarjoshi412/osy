@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { ThemeProvider } from "@/context/ThemeContext";
+import { StartupQRLoader } from "@/components/StartupQRLoader";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -54,7 +55,10 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="min-h-full bg-[var(--background)] text-[var(--foreground)] selection:bg-[#0071e3]/20 selection:text-[#0071e3]">
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          {children}
+          <StartupQRLoader />
+        </ThemeProvider>
       </body>
     </html>
   );

@@ -16,7 +16,10 @@ export function QROverlay({ isOpen, onClose }: QROverlayProps) {
 
   React.useEffect(() => {
     if (typeof window !== 'undefined') {
-      setQrUrl(window.location.origin);
+      const timer = setTimeout(() => {
+        setQrUrl(window.location.origin);
+      }, 0);
+      return () => clearTimeout(timer);
     }
   }, []);
 
@@ -33,7 +36,7 @@ export function QROverlay({ isOpen, onClose }: QROverlayProps) {
 
   return (
     <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-md flex items-center justify-center p-4 animate-in fade-in duration-200">
-      <div className="bg-white dark:bg-[#1c1c1e] rounded-[2.5rem] p-8 max-w-sm w-full shadow-[0_25px_60px_rgba(0,0,0,0.15)] dark:shadow-[0_25px_60px_rgba(0,0,0,0.5)] border border-black/[0.06] dark:border-white/[0.1] flex flex-col items-center gap-6 text-center relative select-none transition-colors duration-300">
+      <div className="bg-white/85 dark:bg-[#1c1c1e]/85 backdrop-blur-2xl rounded-[2.5rem] p-8 max-w-sm w-full shadow-[0_25px_60px_rgba(0,0,0,0.2)] dark:shadow-[0_25px_60px_rgba(0,0,0,0.6)] border border-black/[0.06] dark:border-white/[0.12] flex flex-col items-center gap-6 text-center relative select-none transition-colors duration-300">
         <button
           onClick={() => {
             sound.click();
@@ -57,7 +60,7 @@ export function QROverlay({ isOpen, onClose }: QROverlayProps) {
           </p>
         </div>
 
-        <div className="p-3 bg-white rounded-3xl border border-black/[0.04]">
+        <div className="p-3.5 bg-white/95 backdrop-blur-md rounded-3xl border border-black/[0.04] shadow-sm">
           <QRCodeSVG
             value={qrUrl}
             size={180}
